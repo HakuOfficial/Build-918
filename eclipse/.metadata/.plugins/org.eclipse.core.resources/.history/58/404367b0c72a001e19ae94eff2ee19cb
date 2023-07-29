@@ -1,0 +1,145 @@
+package client.mods.implementations;
+
+import org.lwjgl.opengl.GL11;
+
+import client.draw.Render;
+import client.mods.Hud;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.MathHelper;
+
+public class MouseCircle extends Hud {
+
+	public MouseCircle() {
+		super("Mouse Circle", 40, 80);
+	}
+	
+	private float deltaX;
+    private float deltaY;
+
+	@Override
+	public void onRenderHUD() {
+		GlStateManager.pushMatrix();
+		super.onRenderHUD();
+		float circleX = MathHelper.clamp_float(mc.mouseHelper.deltaX * 2.0f, -(getWidth() / 4), getWidth() / 4);
+        float circleY = MathHelper.clamp_float(mc.mouseHelper.deltaY * 2.0f, -(getHeight() / 4), getHeight() / 4);
+        float delta = 0.3f;
+        if (this.deltaX < circleX) {
+            if (this.deltaX + delta > circleX) {
+                this.deltaX = circleX;
+            } else {
+                this.deltaX += delta;
+            }
+        } else if (this.deltaX > circleX) {
+            if (this.deltaX - delta < circleX) {
+                this.deltaX = circleX;
+            } else {
+                this.deltaX -= delta;
+            }
+        }
+
+        if (this.deltaY < circleY) {
+            if (this.deltaY + delta > circleY) {
+                this.deltaY = circleY;
+            } else {
+                this.deltaY -= delta;
+            }
+        } else if (this.deltaY > circleY) {
+            if (this.deltaY - delta < circleY) {
+                this.deltaY = circleY;
+            } else {
+                this.deltaY += delta;
+            }
+        }
+
+        float baseX = getX() + getWidth() / 2;
+        float baseY = getY() + getHeight() / 2;
+        float radius = 4.5F;
+
+        Render.prepare();
+
+        GL11.glPointSize(4.0F);
+        Render.start();
+        Render.points();
+        Render.color(255, 255, 255, 255);
+        Render.drawPoint(baseX, baseY);
+        Render.finish();
+
+        Render.lineWidth(2F);
+        Render.start();
+        Render.circle(false);
+        Render.color(255, 255, 255, 255);
+        Render.drawCircle(baseX + deltaX, baseY + deltaY, radius, false);
+        Render.finish();
+
+        Render.restore();
+        GlStateManager.popMatrix();
+	}
+	
+	@Override
+	public void onRenderHUDScreen() {
+		super.onRenderHUDScreen();
+		float circleX = MathHelper.clamp_float(mc.mouseHelper.deltaX * 2.0f, -(getWidth() / 4), getWidth() / 4);
+        float circleY = MathHelper.clamp_float(mc.mouseHelper.deltaY * 2.0f, -(getHeight() / 4), getHeight() / 4);
+        float delta = 0.3f;
+        if (this.deltaX < circleX) {
+            if (this.deltaX + delta > circleX) {
+                this.deltaX = circleX;
+            } else {
+                this.deltaX += delta;
+            }
+        } else if (this.deltaX > circleX) {
+            if (this.deltaX - delta < circleX) {
+                this.deltaX = circleX;
+            } else {
+                this.deltaX -= delta;
+            }
+        }
+
+        if (this.deltaY < circleY) {
+            if (this.deltaY + delta > circleY) {
+                this.deltaY = circleY;
+            } else {
+                this.deltaY += delta;
+            }
+        } else if (this.deltaY > circleY) {
+            if (this.deltaY - delta < circleY) {
+                this.deltaY = circleY;
+            } else {
+                this.deltaY -= delta;
+            }
+        }
+
+        float baseX = getX() + getWidth() / 2;
+        float baseY = getY() + getHeight() / 2;
+        float radius = 4.5F;
+
+        Render.prepare();
+
+        GL11.glPointSize(4.0F);
+        Render.start();
+        Render.points();
+        Render.color(255, 255, 255, 255);
+        Render.drawPoint(baseX, baseY);
+        Render.finish();
+
+        Render.lineWidth(2F);
+        Render.start();
+        Render.circle(false);
+        Render.color(255, 255, 255, 255);
+        Render.drawCircle(baseX + this.deltaX, baseY + this.deltaY, radius, false);
+        Render.finish();
+
+        Render.restore();
+	}
+	
+	@Override
+	public int getWidth() {
+		return 40;
+	}
+	
+	@Override
+	public int getHeight() {
+		return 40;
+	}
+}

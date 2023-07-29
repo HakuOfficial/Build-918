@@ -1,0 +1,91 @@
+---- Minecraft Crash Report ----
+// Shall we play a game?
+
+Time: 10/22/22 12:15 PM
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at hakuv2.hud.mod.impl.FPSMod.getWidth(FPSMod.java:30)
+	at hakuv2.hud.mod.impl.FPSMod.draw(FPSMod.java:16)
+	at hakuv2.hud.mod.HudManager.renderMods(HudManager.java:44)
+	at net.minecraft.client.gui.GuiIngame.renderGameOverlay(GuiIngame.java:335)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1279)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1042)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:355)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at hakuv2.hud.mod.impl.FPSMod.getWidth(FPSMod.java:30)
+	at hakuv2.hud.mod.impl.FPSMod.draw(FPSMod.java:16)
+	at hakuv2.hud.mod.HudManager.renderMods(HudManager.java:44)
+	at net.minecraft.client.gui.GuiIngame.renderGameOverlay(GuiIngame.java:335)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player183'/146, l='MpServer', x=8.50, y=65.00, z=8.50]]
+	Chunk stats: MultiplayerChunkCache: 0, 0
+	Level seed: 0
+	Level generator: ID 02 - largeBiomes, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 584.00,64.00,166.00 - World: (584,64,166), Chunk: (at 8,4,6 in 36,10; contains blocks 576,0,160 to 591,255,175), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 0 game time, 0 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 1 total; [EntityPlayerSP['Player183'/146, l='MpServer', x=8.50, y=65.00, z=8.50]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:356)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2608)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:384)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.9
+	Operating System: Mac OS X (x86_64) version 12.5.1
+	Java Version: 1.8.0_341, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 687288984 bytes (655 MB) / 966262784 bytes (921 MB) up to 966262784 bytes (921 MB)
+	JVM Flags: 2 total; -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 99
+	Launched Version: mcp
+	LWJGL: 2.9.4
+	OpenGL: AMD Radeon Pro 560 OpenGL Engine GL version 2.1 ATI-4.8.101, ATI Technologies Inc.
+	GL Caps: VboRegions not supported, missing: OpenGL 1.3, ARB_copy_buffer
+Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i7-7920HQ CPU @ 3.10GHz
+	OptiFine Version: OptiFine_1.8.9_HD_U_M6_pre2
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: Sildur's+Vibrant+Shaders+v1.32+Lite.zip
+	OpenGlVersion: 2.1 ATI-4.8.101
+	OpenGlRenderer: AMD Radeon Pro 560 OpenGL Engine
+	OpenGlVendor: ATI Technologies Inc.
+	CpuCount: 8

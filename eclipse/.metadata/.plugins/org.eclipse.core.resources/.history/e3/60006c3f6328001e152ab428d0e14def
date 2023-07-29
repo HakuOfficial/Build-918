@@ -1,0 +1,44 @@
+package client.mods.implementations;
+
+import java.awt.Color;
+
+import client.mods.Hud;
+
+public class DayCounter extends Hud {
+
+	public DayCounter() {
+		super("Day Counter", 50, 70);
+	}
+	
+	@Override
+	public void onRenderHUD() {
+		super.onRenderHUD();
+		fr.drawString(getText(), getX(), getY(), -1);
+	}
+
+	@Override
+	public void onRenderHUDScreen() {
+		fr.drawString(getText(), getX(), getY(), -1);
+		super.onRenderHUDScreen();
+	}
+	
+	@Override
+	public int getHeight() {
+		return fr.FONT_HEIGHT;
+	}
+	
+	@Override
+	public int getWidth() {
+		return fr.getStringWidth(getText() + 2);
+	}
+	
+	private String getText() {
+		if(mc.theWorld != null && mc.theWorld.getWorldInfo() != null) {
+			long time = mc.theWorld.getWorldInfo().getWorldTotalTime() / 24000L;
+			
+			return time + " Day" + (time != 1L ? "s" :"");
+		}else {
+			return null;
+		}
+	}
+}

@@ -1,0 +1,52 @@
+package client.mods;
+
+import java.util.ArrayList;
+
+import client.mods.implementations.*;
+
+public class AddMod {
+	
+	public ArrayList<Hud> hud = new ArrayList<>();
+	
+	public Hutao hutao;
+	public ToggleSprint toggleSprint;
+	public Zoom zoom;
+	public DayCounter dayCounter;
+	public ItemHeldStatus itemHeldStatus;
+	public ItemPhysics itemPhysics;
+	public CPS cps;
+	
+	public AddMod() {
+		hud.add(hutao = new Hutao());
+		hud.add(toggleSprint = new ToggleSprint());
+		hud.add(zoom = new Zoom());
+		hud.add(dayCounter = new DayCounter());
+		hud.add(itemHeldStatus = new ItemHeldStatus());
+		hud.add(itemPhysics = new ItemPhysics());
+		hud.add(cps = new CPS());
+	}
+	
+	public ArrayList<Hud> getRenderModuleList() {
+    	ArrayList<Hud> h = new ArrayList<>();
+		for(Hud tocase : hud) {
+    		if(tocase instanceof Hud) {
+    			Hud m = (Hud) tocase;
+    			h.add(m);
+    		}
+    	}
+		return h;
+	}
+	
+	public ArrayList<Hud> getHud() {
+		return hud;
+	}
+	
+	public void renderHuds() {
+		for(Hud h : hud) {
+			if(h.isOnOff()) {
+				h.onRenderHUD();
+			}
+		}
+	}
+
+}

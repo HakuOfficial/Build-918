@@ -1,0 +1,95 @@
+---- Minecraft Crash Report ----
+// I'm sorry, Dave.
+
+Time: 7/25/23 8:31 PM
+Description: Unexpected error
+
+java.lang.IllegalArgumentException: Color parameter outside of expected range: Red Green Blue
+	at java.awt.Color.testColorValueRange(Color.java:310)
+	at java.awt.Color.<init>(Color.java:395)
+	at java.awt.Color.<init>(Color.java:369)
+	at client.mods.implementations.Keystrokes.onRenderHUD(Keystrokes.java:136)
+	at client.mods.AddMod.renderHuds(AddMod.java:73)
+	at net.minecraft.client.gui.GuiIngame.renderGameOverlay(GuiIngame.java:343)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1305)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1039)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:352)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at java.awt.Color.testColorValueRange(Color.java:310)
+	at java.awt.Color.<init>(Color.java:395)
+	at java.awt.Color.<init>(Color.java:369)
+	at client.mods.implementations.Keystrokes.onRenderHUD(Keystrokes.java:136)
+	at client.mods.AddMod.renderHuds(AddMod.java:73)
+	at net.minecraft.client.gui.GuiIngame.renderGameOverlay(GuiIngame.java:343)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player559'/363, l='MpServer', x=-190.01, y=82.00, z=160.36]]
+	Chunk stats: MultiplayerChunkCache: 289, 289
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: -195.00,64.00,218.00 - World: (-195,64,218), Chunk: (at 13,4,10 in -13,13; contains blocks -208,0,208 to -193,255,223), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 301740 game time, 185897 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: true), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 78 total; [EntityCreeper['Creeper'/135, l='MpServer', x=-213.50, y=33.00, z=162.50], EntityZombie['Zombie'/136, l='MpServer', x=-213.66, y=32.00, z=153.91], EntityCow['Cow'/137, l='MpServer', x=-210.31, y=77.00, z=161.44], EntityCreeper['Creeper'/138, l='MpServer', x=-216.57, y=69.92, z=218.29], EntityBat['Bat'/139, l='MpServer', x=-214.19, y=12.34, z=227.13], EntityBat['Bat'/2187, l='MpServer', x=-260.75, y=28.69, z=203.31], EntityBat['Bat'/140, l='MpServer', x=-216.50, y=15.66, z=225.88], EntitySkeleton['Skeleton'/146, l='MpServer', x=-193.50, y=17.00, z=143.94], EntitySkeleton['Skeleton'/147, l='MpServer', x=-197.72, y=68.00, z=168.97], EntitySkeleton['Skeleton'/148, l='MpServer', x=-197.50, y=68.00, z=168.03], EntitySkeleton['Skeleton'/149, l='MpServer', x=-196.81, y=68.00, z=169.69], EntitySkeleton['Skeleton'/150, l='MpServer', x=-192.59, y=68.00, z=167.72], EntityCreeper['Creeper'/151, l='MpServer', x=-192.28, y=68.00, z=186.97], EntityCreeper['Creeper'/152, l='MpServer', x=-193.06, y=72.00, z=180.50], EntityZombie['Zombie'/153, l='MpServer', x=-205.06, y=79.00, z=180.03], EntityPig['Pig'/166, l='MpServer', x=-180.41, y=83.00, z=82.25], EntitySkeleton['Skeleton'/167, l='MpServer', x=-187.13, y=66.00, z=155.69], EntityZombie['Zombie'/168, l='MpServer', x=-183.50, y=12.00, z=162.56], EntitySkeleton['Skeleton'/169, l='MpServer', x=-196.09, y=68.00, z=165.47], EntitySkeleton['Skeleton'/170, l='MpServer', x=-191.50, y=68.00, z=169.09], EntityCreeper['Creeper'/171, l='MpServer', x=-182.35, y=64.00, z=173.94], EntitySpider['Spider'/172, l='MpServer', x=-185.63, y=82.00, z=163.63], EntityZombie['Zombie'/175, l='MpServer', x=-174.09, y=44.00, z=142.50], EntityZombie['Zombie'/176, l='MpServer', x=-160.13, y=16.00, z=145.66], EntityCreeper['Creeper'/177, l='MpServer', x=-166.50, y=43.00, z=145.50], EntityZombie['Zombie'/178, l='MpServer', x=-171.03, y=61.00, z=157.56], EntityZombie['Zombie'/179, l='MpServer', x=-171.16, y=62.00, z=154.59], EntitySkeleton['Skeleton'/180, l='MpServer', x=-174.72, y=68.00, z=152.72], EntitySpider['Spider'/181, l='MpServer', x=-162.72, y=78.00, z=155.06], EntityBat['Bat'/182, l='MpServer', x=-162.25, y=46.10, z=165.38], EntitySkeleton['Skeleton'/183, l='MpServer', x=-168.94, y=61.00, z=168.66], EntitySkeleton['Skeleton'/184, l='MpServer', x=-167.81, y=61.00, z=170.16], EntityCow['Cow'/185, l='MpServer', x=-169.38, y=67.00, z=217.38], EntityCow['Cow'/194, l='MpServer', x=-159.66, y=69.00, z=101.44], EntityZombie['Zombie'/195, l='MpServer', x=-151.50, y=81.00, z=141.50], EntityCow['Cow'/196, l='MpServer', x=-148.56, y=74.00, z=151.78], EntityCow['Cow'/197, l='MpServer', x=-150.56, y=71.00, z=159.28], EntityItem['item.item.rottenFlesh'/198, l='MpServer', x=-147.13, y=19.00, z=172.84], EntityBat['Bat'/199, l='MpServer', x=-147.06, y=26.08, z=171.75], EntityZombie['Zombie'/200, l='MpServer', x=-151.50, y=69.00, z=179.50], EntitySkeleton['Skeleton'/201, l='MpServer', x=-153.50, y=69.00, z=182.50], EntityCow['Cow'/202, l='MpServer', x=-145.81, y=75.00, z=205.25], EntityCow['Cow'/203, l='MpServer', x=-153.84, y=74.00, z=209.16], EntityCow['Cow'/209, l='MpServer', x=-143.84, y=76.00, z=95.88], EntityWitch['Witch'/210, l='MpServer', x=-131.50, y=31.00, z=149.50], EntityRabbit['Rabbit'/211, l='MpServer', x=-140.34, y=65.00, z=151.09], EntityPig['Pig'/212, l='MpServer', x=-140.25, y=61.00, z=160.16], EntityCreeper['Creeper'/213, l='MpServer', x=-129.63, y=46.00, z=183.69], EntityCow['Cow'/214, l='MpServer', x=-134.53, y=72.00, z=185.63], EntitySpider['Spider'/222, l='MpServer', x=-125.50, y=75.00, z=92.50], EntityCow['Cow'/95, l='MpServer', x=-260.31, y=112.00, z=94.06], EntityCreeper['Creeper'/223, l='MpServer', x=-114.50, y=21.00, z=152.50], EntityCow['Cow'/96, l='MpServer', x=-257.97, y=109.00, z=106.47], EntityRabbit['Rabbit'/224, l='MpServer', x=-118.31, y=64.00, z=151.22], EntityCow['Cow'/97, l='MpServer', x=-256.16, y=97.00, z=108.75], EntityPig['Pig'/225, l='MpServer', x=-124.03, y=64.00, z=150.44], EntityCow['Cow'/98, l='MpServer', x=-260.25, y=111.00, z=98.28], EntityRabbit['Rabbit'/226, l='MpServer', x=-120.75, y=64.00, z=171.28], EntitySkeleton['Skeleton'/99, l='MpServer', x=-264.50, y=68.00, z=173.50], EntityZombie['Zombie'/227, l='MpServer', x=-125.50, y=48.00, z=178.50], EntityCow['Cow'/228, l='MpServer', x=-125.28, y=66.00, z=177.78], EntitySkeleton['Skeleton'/229, l='MpServer', x=-123.19, y=66.00, z=179.53], EntitySpider['Spider'/230, l='MpServer', x=-112.31, y=44.00, z=193.81], EntitySpider['Spider'/231, l='MpServer', x=-112.50, y=74.00, z=218.50], EntitySkeleton['Skeleton'/232, l='MpServer', x=-115.03, y=74.00, z=218.00], EntityPlayerSP['Player559'/363, l='MpServer', x=-190.01, y=82.00, z=160.36], EntityCow['Cow'/113, l='MpServer', x=-250.56, y=89.00, z=127.81], EntityCow['Cow'/114, l='MpServer', x=-245.66, y=77.00, z=140.59], EntityCow['Cow'/115, l='MpServer', x=-247.75, y=68.00, z=149.28], EntityCow['Cow'/116, l='MpServer', x=-245.09, y=72.00, z=197.94], EntityZombie['Zombie'/244, l='MpServer', x=-111.50, y=44.00, z=190.50], EntityBat['Bat'/117, l='MpServer', x=-239.59, y=35.97, z=227.72], EntityCow['Cow'/119, l='MpServer', x=-230.19, y=74.00, z=140.06], EntityCow['Cow'/120, l='MpServer', x=-231.38, y=74.00, z=139.66], EntityCow['Cow'/121, l='MpServer', x=-238.81, y=72.00, z=166.66], EntityBat['Bat'/122, l='MpServer', x=-236.38, y=16.00, z=214.75], EntityZombie['Zombie'/123, l='MpServer', x=-233.44, y=37.00, z=235.47], EntityBat['Bat'/124, l='MpServer', x=-235.66, y=36.34, z=231.34]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:356)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2607)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:381)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.9
+	Operating System: Mac OS X (x86_64) version 12.5.1
+	Java Version: 1.8.0_381, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 688387592 bytes (656 MB) / 988807168 bytes (943 MB) up to 988807168 bytes (943 MB)
+	JVM Flags: 2 total; -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	Launched Version: mcp
+	LWJGL: 2.9.4
+	OpenGL: AMD Radeon Pro 560 OpenGL Engine GL version 2.1 ATI-4.8.101, ATI Technologies Inc.
+	GL Caps: VboRegions not supported, missing: OpenGL 1.3, ARB_copy_buffer
+Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: !§3ハク§6pack §f[16x].zip, ! §9VENOM §8§l[§f§816x§l] §f§8sound pack
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i7-7920HQ CPU @ 3.10GHz
+	OptiFine Version: OptiFine_1.8.9_HD_U_M6_pre2
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 2
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 2.1 ATI-4.8.101
+	OpenGlRenderer: AMD Radeon Pro 560 OpenGL Engine
+	OpenGlVendor: ATI Technologies Inc.
+	CpuCount: 8

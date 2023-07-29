@@ -1,0 +1,93 @@
+---- Minecraft Crash Report ----
+// Why did you do that?
+
+Time: 10/22/22 11:19 AM
+Description: Rendering screen
+
+java.lang.NullPointerException: Rendering screen
+	at hakuv2.gui.click.comp.ModButton.draw(ModButton.java:22)
+	at hakuv2.gui.click.ClickGUI.drawScreen(ClickGUI.java:40)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1319)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1042)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:355)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at hakuv2.gui.click.comp.ModButton.draw(ModButton.java:22)
+	at hakuv2.gui.click.ClickGUI.drawScreen(ClickGUI.java:40)
+
+-- Screen render details --
+Details:
+	Screen name: hakuv2.gui.click.ClickGUI
+	Mouse location: Scaled: (225, 121). Absolute: (451, 237)
+	Screen size: Scaled: (427, 240). Absolute: (854, 480). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player757'/179, l='MpServer', x=534.36, y=72.00, z=427.63]]
+	Chunk stats: MultiplayerChunkCache: 260, 260
+	Level seed: 0
+	Level generator: ID 02 - largeBiomes, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 584.00,64.00,166.00 - World: (584,64,166), Chunk: (at 8,4,6 in 36,10; contains blocks 576,0,160 to 591,255,175), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 7047 game time, 6427 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 34 total; [EntityWitch['Witch'/256, l='MpServer', x=465.50, y=47.00, z=420.50], EntityCreeper['Creeper'/285, l='MpServer', x=472.50, y=35.00, z=354.50], EntityZombie['Zombie'/30, l='MpServer', x=523.50, y=42.00, z=359.50], EntityZombie['Zombie'/31, l='MpServer', x=527.50, y=42.00, z=359.50], EntityZombie['Zombie'/315, l='MpServer', x=557.50, y=32.00, z=436.50], EntityZombie['Zombie'/316, l='MpServer', x=555.50, y=32.00, z=437.50], EntityZombie['Zombie'/317, l='MpServer', x=552.50, y=17.00, z=489.50], EntitySkeleton['Skeleton'/320, l='MpServer', x=468.22, y=32.00, z=410.75], EntityZombie['Zombie'/329, l='MpServer', x=464.50, y=50.00, z=417.50], EntityCreeper['Creeper'/90, l='MpServer', x=592.50, y=24.00, z=361.50], EntityPlayerSP['Player757'/179, l='MpServer', x=534.36, y=72.00, z=427.63], EntityZombie['Zombie'/186, l='MpServer', x=474.50, y=40.00, z=392.50], EntitySkeleton['Skeleton'/187, l='MpServer', x=475.50, y=40.00, z=394.50], EntityBat['Bat'/188, l='MpServer', x=472.81, y=60.09, z=425.72], EntitySkeleton['Skeleton'/189, l='MpServer', x=490.50, y=52.00, z=382.50], EntitySkeleton['Skeleton'/190, l='MpServer', x=489.72, y=54.00, z=378.44], EntitySkeleton['Skeleton'/195, l='MpServer', x=550.50, y=51.00, z=500.50], EntitySpider['Spider'/196, l='MpServer', x=565.50, y=53.00, z=445.50], EntityZombie['Zombie'/197, l='MpServer', x=566.50, y=53.00, z=449.50], EntityZombie['Zombie'/198, l='MpServer', x=561.50, y=53.00, z=448.50], EntitySkeleton['Skeleton'/199, l='MpServer', x=565.50, y=53.00, z=448.50], EntityCreeper['Creeper'/200, l='MpServer', x=586.50, y=15.00, z=462.50], EntityMinecartChest['container.minecart'/201, l='MpServer', x=592.50, y=24.06, z=378.50], EntitySkeleton['Skeleton'/206, l='MpServer', x=585.50, y=20.00, z=349.50], EntityBat['Bat'/212, l='MpServer', x=551.59, y=19.56, z=490.69], EntityBat['Bat'/219, l='MpServer', x=566.22, y=17.97, z=494.63], EntityBat['Bat'/220, l='MpServer', x=563.59, y=17.38, z=495.41], EntityBat['Bat'/221, l='MpServer', x=564.56, y=34.88, z=472.47], EntityZombie['Zombie'/229, l='MpServer', x=457.50, y=49.00, z=424.50], EntityEnderman['Enderman'/230, l='MpServer', x=472.50, y=25.00, z=375.50], EntityCreeper['Creeper'/244, l='MpServer', x=459.50, y=49.00, z=420.50], EntityZombie['Zombie'/246, l='MpServer', x=469.50, y=28.00, z=428.50], EntitySkeleton['Skeleton'/254, l='MpServer', x=458.50, y=51.00, z=438.50], EntityWitch['Witch'/255, l='MpServer', x=466.50, y=47.00, z=420.50]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:356)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2608)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:376)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.9
+	Operating System: Mac OS X (x86_64) version 12.5.1
+	Java Version: 1.8.0_341, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 784353480 bytes (748 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 99
+	Launched Version: mcp
+	LWJGL: 2.9.4
+	OpenGL: AMD Radeon Pro 560 OpenGL Engine GL version 2.1 ATI-4.8.101, ATI Technologies Inc.
+	GL Caps: VboRegions not supported, missing: OpenGL 1.3, ARB_copy_buffer
+Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i7-7920HQ CPU @ 3.10GHz
+	OptiFine Version: OptiFine_1.8.9_HD_U_M6_pre2
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: Sildur's+Vibrant+Shaders+v1.32+Lite.zip
+	OpenGlVersion: 2.1 ATI-4.8.101
+	OpenGlRenderer: AMD Radeon Pro 560 OpenGL Engine
+	OpenGlVendor: ATI Technologies Inc.
+	CpuCount: 8

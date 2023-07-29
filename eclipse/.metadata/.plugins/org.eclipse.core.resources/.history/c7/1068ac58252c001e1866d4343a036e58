@@ -1,0 +1,65 @@
+package client.screen.settings;
+
+import java.awt.Color;
+import java.io.IOException;
+
+import client.Hutao;
+import client.screen.module.GuiCheckBox;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiClientSettings extends GuiScreen {
+	
+	public GuiCheckBox minimalViewBobbing;
+	public GuiCheckBox noHurtCam;
+
+	@Override
+	public void initGui() {
+		super.initGui();
+		
+		this.buttonList.add(minimalViewBobbing = new GuiCheckBox(0, 10, 10, 50, 50, true));
+		minimalViewBobbing.setChecked(Hutao.getInstance().addSet.minimal.isOnOff());
+		
+		this.buttonList.add(noHurtCam = new GuiCheckBox(0, 70, 10, 50, 50, true));
+		minimalViewBobbing.setChecked(Hutao.getInstance().addSet.minimal.isOnOff());
+		
+		mc.entityRenderer.loadShader(new ResourceLocation("hutao/blur.json"));
+	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		Gui.drawRect(0, 0, this.width, this.height, new Color(0, 0, 0, 200).getRGB());
+		
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		
+		if(minimalViewBobbing.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 100, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Minimal ViewBobbing", mouseX + 10, mouseY, -1);
+		}
+		if(noHurtCam.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 70, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("noHurtCam", mouseX + 10, mouseY, -1);
+		}
+	}
+	
+	@Override
+	public void onGuiClosed() {
+		mc.entityRenderer.stopUseShader();
+		super.onGuiClosed();
+	}
+	
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		if(button.id == 0) {
+			Hutao.getInstance().addSet.minimal.onoff();
+		}
+		super.actionPerformed(button);
+	}
+}

@@ -1,0 +1,21 @@
+package client.mods.implementations;
+
+import java.awt.Color;
+
+import org.lwjgl.opengl.GL11;
+
+import client.draw.DrawRoundedRect;
+import client.mods.Hud;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.settings.KeyBinding;
+
+public class Keystrokes extends Hud {
+	
+	public Keystrokes() {
+		super("KeyStrokes", 100, 100);
+	}
+	
+	
+
+}

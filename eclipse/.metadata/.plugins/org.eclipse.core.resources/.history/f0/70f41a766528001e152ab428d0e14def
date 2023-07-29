@@ -1,0 +1,10 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class Zoom extends Hud {
+
+	public Zoom() {
+		super("Zoom", 0, 0);
+	}
+}

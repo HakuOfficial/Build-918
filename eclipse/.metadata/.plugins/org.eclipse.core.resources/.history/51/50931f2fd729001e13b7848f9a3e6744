@@ -1,0 +1,5 @@
+package client.mods.implementations;
+
+public class FPSMod {
+
+}

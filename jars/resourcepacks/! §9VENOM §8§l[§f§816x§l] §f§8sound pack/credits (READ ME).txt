@@ -1,0 +1,24 @@
+Venom/Grape 16x is a revamp of Bombies 80k by Tory. I neither take credit for textures from the original pack nor the ones I have recolored/altered.
+
+individual credits:
+
+sword model is based on 182exe's overlay:
+https://youtu.be/WjXTmPFZJtU
+
+recolored/retextured:
+ladder - ice 32x (Raupeee_)
+day sky 2 - nohuh 20k (vltr)
+lunar gui/icons - Solar Tweaks overlay via a cat#0001 + redefault#4883
+night sky - 無限 NRKM
+tools - ggmen 16x (luvonox)
+pearl - crimson 16x (vers)
+containers - namebrand 20k
+
+unchanged textures:
+golden apple/hunger - ch3rt 1K
+day sky - bombies 80k (logo is not intended to claim ownership, just for continuity)
+eat/explode sound - ggmen 16x
+wool - venom 32x (barbei)
+crosshair - myint private
+ingots - bombies 10k
+clay - SeaSide (Rassasin)

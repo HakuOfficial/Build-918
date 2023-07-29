@@ -1,0 +1,163 @@
+package client.screen.hud;
+
+import java.awt.Color;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL11;
+
+import client.Hutao;
+import client.mods.Hud;
+import client.screen.module.GuiModule;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiHudScreen extends GuiScreen {
+	private int dragX, dragY;
+	private Hud dragging;
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+		mc.entityRenderer.loadShader(new ResourceLocation("hutao/blur.json"));
+		this.buttonList.add(new GuiButton(0, this.width / 2 - 20, this.height / 2 - 10, 50, 30, "Modules"));
+	}
+	
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		mc.entityRenderer.stopUseShader();
+	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		
+		for(Hud m : Hutao.getInstance().addMod.getRenderModuleList()) {
+			if (m.isOnOff()) {
+				m.onRenderHUDScreen();
+				Gui.drawRect(m.getX() - 2, m.getY() - 2, m.getX() + m.getWidth() + 2, m.getY() + m.getHeight() + 2, new Color(255,255,255,40).getRGB());
+				if(m.isHovered(mouseX, mouseY)) {
+					this.drawBoxAroundModule(m);
+					String name = "§9§l" + m.getName();
+	                String posText = "§3X: " + m.getX() + "  " + "§4Y: " + m.getY();
+	                ScaledResolution sr = new ScaledResolution(mc);
+	                int fh = fontRendererObj.FONT_HEIGHT;
+	                int nw = fontRendererObj.getStringWidth(name);
+	                int pw = fontRendererObj.getStringWidth(posText);
+	                int fw;
+	                if(nw > pw) fw = nw;
+	                else fw = pw;
+	                int infoW = fw + 20, infoH = fh * 2 + 25;
+	                if(mouseX + infoW > sr.getScaledWidth()) {
+	                    if(mouseY + infoH > sr.getScaledHeight()) {
+	                        Gui.drawRect(mouseX, mouseY, mouseX - infoW, mouseY - infoH, new Color(0, 0, 0, 120).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(name, mouseX - infoW + 10, mouseY - infoH + 10, new Color(255, 255, 255).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(posText, mouseX - infoW + 10, mouseY - infoH + 15 + fh, new Color(255, 255, 255).getRGB());
+	                    } else {
+	                        Gui.drawRect(mouseX, mouseY, mouseX - infoW, mouseY + infoH, new Color(0, 0, 0, 120).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(name, mouseX - infoW + 10, mouseY + 10, new Color(255, 255, 255).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(posText, mouseX - infoW + 10, mouseY + 15 + fh, new Color(255, 255, 255).getRGB());
+	                    }
+	                } else {
+	                    if(mouseY + infoH > sr.getScaledHeight()) {
+	                        Gui.drawRect(mouseX, mouseY, mouseX + infoW, mouseY - infoH, new Color(0, 0, 0, 120).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(name, mouseX + 10, mouseY - infoH + 10, new Color(255, 255, 255).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(posText, mouseX + 10, mouseY - infoH + 15 + fh, new Color(255, 255, 255).getRGB());
+	                    } else {
+	                        Gui.drawRect(mouseX, mouseY, mouseX + infoW, mouseY + infoH, new Color(0, 0, 0, 120).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(name, mouseX + 10, mouseY + 10, new Color(255, 255, 255).getRGB());
+	                        mc.fontRendererObj.drawStringWithShadow(posText, mouseX + 10, mouseY + 15 + fh, new Color(255, 255, 255).getRGB());
+	                    }
+	                }
+				}
+				if(m == dragging) {
+					m.setX(dragX + mouseX);
+		            m.setY(dragY + mouseY);
+				}
+			}
+		}
+		Gui.drawRect(0, 0, this.width, this.height, new Color(0, 0, 0, 50).getRGB());
+	}
+	
+	private void drawBoxAroundModule(Hud m) {
+		GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glLineWidth(1);
+        GL11.glColor4f(255, 255, 255, 255);
+        
+        // top line
+        GL11.glBegin(2);
+        GL11.glVertex2d(m.getX() - 1.5, m.getY() - 1.5);
+        GL11.glVertex2d(m.getX() + m.getWidth() + 1.5, m.getY() - 1.5);
+        GL11.glEnd();
+        
+        // bottom line
+        GL11.glBegin(2);
+        GL11.glVertex2d(m.getX() - 1.5, m.getY() + m.getHeight() + 1.5);
+        GL11.glVertex2d(m.getX() + m.getWidth() + 1.5, m.getY() + m.getHeight() + 1.5);
+        GL11.glEnd();
+        
+        // left line
+        GL11.glBegin(2);
+        GL11.glVertex2d(m.getX() - 1.5, m.getY() - 1.5);
+        GL11.glVertex2d(m.getX() - 1.5, m.getY() + m.getHeight() + 1.5);
+        GL11.glEnd();
+        
+        // right line
+        GL11.glBegin(2);
+        GL11.glVertex2d(m.getX() + m.getWidth() + 1.5, m.getY() - 1.5);
+        GL11.glVertex2d(m.getX() + m.getWidth() + 1.5, m.getY() + m.getHeight() + 1.5);
+        GL11.glEnd();
+        
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
+	}
+	
+	@Override
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+		super.mouseClicked(mouseX, mouseY, mouseButton);
+		ArrayList<Hud> hovered = new ArrayList<>();
+		for(Hud m : Hutao.getInstance().addMod.getRenderModuleList()) {
+			if(!m.isOnOff()) continue;
+			if (m.isHovered(mouseX, mouseY) && mouseButton == 0) {
+				hovered.add(m);
+				dragging = m;
+	            dragX = m.getX() - mouseX;
+	            dragY = m.getY() - mouseY;
+				}
+			}
+		}
+	
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		if(button.id == 0) {
+			mc.displayGuiScreen(new GuiModule());
+		}
+		super.actionPerformed(button);
+	}
+
+	
+	@Override
+    public void mouseReleased(int mouseX, int mouseY, int state) {
+		dragging = null;
+    }
+	
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+
+}

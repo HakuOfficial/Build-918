@@ -1,0 +1,4 @@
+must include:
+cloud1 - day
+cloud2 - sunset
+starfield03 - night

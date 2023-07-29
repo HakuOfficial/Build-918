@@ -1,0 +1,5 @@
+package client.screen.settings;
+
+public class GuiClientSettings {
+
+}

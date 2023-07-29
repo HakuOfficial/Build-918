@@ -1,0 +1,10 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class Direction extends Hud {
+
+	public Direction() {
+		super("Direction", 70, 70);
+	}
+}

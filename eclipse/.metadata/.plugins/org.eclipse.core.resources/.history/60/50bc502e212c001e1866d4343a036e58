@@ -1,0 +1,26 @@
+package client.screen.settings;
+
+import client.screen.module.GuiCheckBox;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiClientSettings extends GuiScreen {
+
+	@Override
+	public void initGui() {
+		super.initGui();
+		this.buttonList.add(new GuiCheckBox(0, 10, 10));
+		mc.entityRenderer.loadShader(new ResourceLocation("hutao/blur.json"));
+	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		
+		super.drawScreen(mouseX, mouseY, partialTicks);
+	}
+	
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+}

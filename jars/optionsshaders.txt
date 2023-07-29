@@ -1,0 +1,19 @@
+#Sat Jul 29 10:01:12 ICT 2023
+shaderPack=Client MotionBlur.zip
+antialiasingLevel=4
+normalMapEnabled=true
+specularMapEnabled=true
+renderResMul=1.0
+shadowResMul=1.0
+handDepthMul=0.125
+cloudShadow=false
+oldHandLight=true
+oldLighting=true
+tweakBlockDamage=false
+shadowClipFrustrum=true
+TexMinFilB=0
+TexMinFilN=0
+TexMinFilS=0
+TexMagFilB=0
+TexMagFilN=0
+TexMagFilS=0

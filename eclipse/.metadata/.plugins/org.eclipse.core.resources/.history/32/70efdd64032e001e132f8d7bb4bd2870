@@ -1,0 +1,15 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class CustomCrosshair extends Hud {
+
+	public CustomCrosshair() {
+		super("Custom Crosshair", 0, 0);
+	}
+	
+	@Override
+	public void onRenderHUD() {
+		
+	}
+}

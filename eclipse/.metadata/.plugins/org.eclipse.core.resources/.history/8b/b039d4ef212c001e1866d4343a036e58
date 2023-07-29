@@ -1,0 +1,5 @@
+package client.screen.settings.impl;
+
+public class MinimalViewBobbing {
+
+}

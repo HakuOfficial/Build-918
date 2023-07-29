@@ -1,0 +1,32 @@
+package client.cosmetic;
+
+public class CosmeticBoolean {
+    public static boolean hutaoCapeA = false;
+    public static boolean meguminCapeB = false;
+    public static boolean bunnyCapeC = true;
+    public static boolean cityCapeD = false;
+    public static boolean normalCape = false;
+
+    public CosmeticBoolean() {
+    }
+
+    public static boolean HutaoCapeA() {
+        return hutaoCapeA;
+    }
+    
+    public static boolean MeguminCapeB() {
+        return meguminCapeB;
+    }
+    
+    public static boolean BunnyCapeC() {
+        return bunnyCapeC;
+    }
+    
+    public static boolean CityCapeD() {
+        return cityCapeD;
+    }
+
+    public static boolean NormalCape() {
+        return normalCape;
+    }
+}

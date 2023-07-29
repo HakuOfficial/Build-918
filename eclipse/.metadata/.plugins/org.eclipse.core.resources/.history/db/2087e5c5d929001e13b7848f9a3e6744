@@ -1,0 +1,11 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class BlockOverlay extends Hud {
+
+	public BlockOverlay() {
+		super("Block Overlay", 0, 0);
+	}
+
+}

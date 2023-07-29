@@ -1,0 +1,2 @@
+#Sat Oct 29 22:08:27 ICT 2022
+Motionblur=true

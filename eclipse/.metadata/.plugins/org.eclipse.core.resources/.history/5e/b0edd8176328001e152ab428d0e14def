@@ -1,0 +1,63 @@
+package client.mods.implementations;
+
+import org.lwjgl.opengl.GL11;
+
+import client.mods.Hud;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
+public class ItemHeldStatus extends Hud {
+	
+	public ItemHeldStatus() {
+		super("Item Held Status", 30, 60);
+	}
+	
+	@Override
+	public void onRenderHUD() {
+		ItemStack item = mc.thePlayer.getHeldItem();
+		renderItemStack(2, item);
+		super.onRenderHUD();
+	}
+	
+	@Override
+	public void onRenderHUDScreen() {
+		renderItemStack(2, new ItemStack(Items.diamond_axe));
+		super.onRenderHUDScreen();
+	}
+	
+private void renderItemStack(int i, ItemStack is) {
+		
+		if(is == null	) {
+			return;
+		}
+		GL11.glPushMatrix();
+		int yAdd = (-16 * 3) + 48;
+		if(mc.thePlayer !=null && is !=null) {
+		   if(is.getItem().isDamageable()) {
+			  double damage = (is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage() * 100;
+			  fr.drawString(String.format("%.2f%%", damage), getX() + 20, getY() + yAdd + 5, -1);
+		  }
+		
+		  if(is.isStackable() && mc.thePlayer.getHeldItem().stackSize !=1) {
+			  fr.drawString(Integer.toString(mc.thePlayer.getHeldItem().stackSize), getX() + 20, getY() + yAdd + 5, -1);
+			
+		  }
+		 
+		  RenderHelper.enableGUIStandardItemLighting();
+		  mc.getRenderItem().renderItemAndEffectIntoGUI(is, getX(), getY() + yAdd);
+		  GL11.glPopMatrix();
+		}
+	}
+	
+	@Override
+	public int getWidth() {
+		return 60;
+	}
+
+	@Override
+	public int getHeight() {
+		return 15;
+	}
+
+}

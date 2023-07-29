@@ -1,0 +1,18 @@
+package client.screen.settings;
+
+import client.screen.module.GuiCheckBox;
+import net.minecraft.client.gui.GuiScreen;
+
+public class GuiClientSettings extends GuiScreen {
+
+	@Override
+	public void initGui() {
+		super.initGui();
+		this.buttonList.add(new GuiCheckBox(10, 10, 10));
+	}
+	
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+}

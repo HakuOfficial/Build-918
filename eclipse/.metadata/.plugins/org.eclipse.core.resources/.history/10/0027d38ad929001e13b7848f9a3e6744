@@ -1,0 +1,10 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class ItemPhysics extends Hud {
+
+	public ItemPhysics() {
+		super("Item Physics", 0, 0);
+	}
+}

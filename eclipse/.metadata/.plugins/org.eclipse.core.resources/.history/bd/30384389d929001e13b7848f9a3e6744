@@ -1,0 +1,11 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class ScoreBoard extends Hud {
+
+	public ScoreBoard() {
+		super("Score Board", 0, 0);
+	}
+
+}

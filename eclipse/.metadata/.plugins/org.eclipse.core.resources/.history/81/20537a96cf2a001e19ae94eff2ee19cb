@@ -1,0 +1,67 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+
+public class Direction extends Hud {
+	protected static ScaledResolution scaledResolution;
+    public static String markerColor = "c";
+    public static int compassIndex = 0;
+    protected static float zLevel;
+	public Direction() {
+		super("Direction", 70, 70);
+	}
+	
+	@Override
+	public int getWidth() {
+		return 102;
+	}
+
+	@Override
+	public int getHeight() {
+		return 15;
+	}
+	
+	private static int getX2(int width) {
+		return width;
+    }
+
+    private static int getY2(int rowCount, int height) {
+        return height;
+    }
+	
+	@Override
+	public void onRenderHUD() {
+		int direction = MathHelper.floor_double((double) (mc.thePlayer.rotationYaw * 256.0F / 360.0F) + 0.5D) & 255;
+        int yBase = getY2(1, 12);
+        int xBase = getX2(65);
+        
+        mc.getTextureManager().bindTexture(new ResourceLocation("Hutao/Direction.png"));
+        if (direction < 128) {
+        	drawTexturedModalRect(getX() + xBase - 64, getY() + yBase - 10, direction, this.compassIndex * 24, 100, 13);
+        } else {
+            drawTexturedModalRect(getX() + xBase - 64, getY() + yBase - 10, direction - 128, this.compassIndex * 24 + 12, 100, 13);
+        }
+
+        mc.fontRendererObj.drawString("§" + this.markerColor.toLowerCase() + "|§r", getX() + xBase - 16, getY() + yBase - 7, 16777215);
+	}
+	
+	public static void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)
+    {
+        float f = 0.00390625F;
+        float f1 = 0.00390625F;
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+        worldrenderer.pos((double)(x + 0), (double)(y + height), (double)zLevel).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + height) * f1)).endVertex();
+        worldrenderer.pos((double)(x + width), (double)(y + height), (double)zLevel).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + height) * f1)).endVertex();
+        worldrenderer.pos((double)(x + width), (double)(y + 0), (double)zLevel).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + 0) * f1)).endVertex();
+        worldrenderer.pos((double)(x + 0), (double)(y + 0), (double)zLevel).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + 0) * f1)).endVertex();
+        tessellator.draw();
+    }
+}

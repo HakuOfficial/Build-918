@@ -1,0 +1,42 @@
+package client.draw;
+
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.MathHelper;
+
+public class Render {
+	private static Tessellator t;
+
+    private static WorldRenderer wr;
+
+    private static final float DEG2RAD = 0.017453277F;
+
+    private static int r, g, b, a;
+
+    private static float lineWidth;
+    
+    public static void start() {
+        t = Tessellator.getInstance();
+        wr = t.getWorldRenderer();
+    }
+
+    public static void color(int red, int green, int blue, int alpha) {
+        r = MathHelper.clamp_int(red, 0, 255);
+        g = MathHelper.clamp_int(green, 0, 255);
+        b = MathHelper.clamp_int(blue, 0, 255);
+        a = alpha;
+    }
+    
+    public static void points() {
+        wr.begin(0, DefaultVertexFormats.POSITION_COLOR);
+    }
+    
+    public static void circle(boolean filled) {
+        wr.begin(filled ? 6 : 2, DefaultVertexFormats.POSITION_COLOR);
+    }
+    
+    public static void drawPoint(double x, double y) {
+        wr.pos(x, y, 0.0D).color(r, g, b, a).endVertex();
+    }
+}

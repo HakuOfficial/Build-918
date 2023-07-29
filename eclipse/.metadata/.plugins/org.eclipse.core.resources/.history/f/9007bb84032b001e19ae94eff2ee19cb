@@ -1,0 +1,230 @@
+package client.screen.module;
+
+import java.awt.Color;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import client.Hutao;
+import client.draw.DrawPicture;
+import client.draw.DrawRoundedRect;
+import client.screen.cosmetic.GuiCosmetic;
+import client.screen.hud.GuiHudScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiModule extends GuiScreen {
+	
+	private Calendar calendar;
+	private SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+	private String time = format.format(Calendar.getInstance().getTime());
+	
+	public GuiCheckBox checkBox;
+	public GuiCheckBox checkBox1;
+	public GuiCheckBox checkBox2;
+	public GuiCheckBox checkBox3;
+	public GuiCheckBox checkBox4;
+	public GuiCheckBox checkBox5;
+	public GuiCheckBox checkBox6;
+	public GuiCheckBox checkBox7;
+	public GuiCheckBox checkBox8;
+	public GuiCheckBox checkBox9;
+	public GuiCheckBox checkBox10;
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+		mc.entityRenderer.loadShader(new ResourceLocation("hutao/blur.json"));
+		this.buttonList.add(new GuiButton(0, this.width - 55, 40, 35, 35, "§lX"));
+		this.buttonList.add(new GuiButton(1, this.width - 95, 40, 35, 35, "§lHud"));;
+		this.buttonList.add(new GuiButton(-1, this.width - 165, 40, 65, 35, "Cosmetic"));
+		this.buttonList.add(new GuiButton(-3, 0, 40, 40, 25, "Discord"));
+		
+		this.buttonList.add(new GuiButton(-5, this.width - 235, 40, 65, 35, "Preview"));
+		
+		this.buttonList.add(new GuiButton(-2, this.width - 95, 90, 35, 35, "§l>"));
+		
+		this.buttonList.add(checkBox = new GuiCheckBox(2, 165, this.height / 100 + 80, this.width / 7 - 30, this.height / 4 - 30, true));
+		checkBox.setChecked(Hutao.getInstance().addMod.hutao.isOnOff());
+		
+		this.buttonList.add(checkBox1 = new GuiCheckBox(3, 165, this.height / 4 + 60, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox1.setChecked(Hutao.getInstance().addMod.toggleSprint.isOnOff());
+		
+		this.buttonList.add(checkBox2 = new GuiCheckBox(4, 165, this.height / 2 + 38, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox2.setChecked(Hutao.getInstance().addMod.zoom.isOnOff());
+		
+		this.buttonList.add(checkBox3 = new GuiCheckBox(5, this.width / 4 + 95, this.height / 100 + 80, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox3.setChecked(Hutao.getInstance().addMod.chat.isOnOff());
+		
+		this.buttonList.add(checkBox4 = new GuiCheckBox(6, this.width / 4 + 95, this.height / 4 + 60, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox4.setChecked(Hutao.getInstance().addMod.cps.isOnOff());
+		
+		this.buttonList.add(checkBox5 = new GuiCheckBox(7, this.width / 4 + 95, this.height / 2 + 38, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox5.setChecked(Hutao.getInstance().addMod.itemHeldStatus.isOnOff());
+		
+		this.buttonList.add(checkBox6 = new GuiCheckBox(8, this.width / 2 + 25, this.height / 100 + 80, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox6.setChecked(Hutao.getInstance().addMod.itemPhysics.isOnOff());
+		
+		this.buttonList.add(checkBox7 = new GuiCheckBox(9, this.width / 2 + 25, this.height / 4 + 60, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox7.setChecked(Hutao.getInstance().addMod.dayCounter.isOnOff());
+		
+		this.buttonList.add(checkBox8 = new GuiCheckBox(10, this.width / 2 + 25, this.height / 2 + 38, this.width / 7 - 30, this.height / 4 - 30, true));;
+		checkBox8.setChecked(Hutao.getInstance().addMod.keystrokes.isOnOff());
+	}
+	
+
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		mc.entityRenderer.stopUseShader();
+	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+		
+		Gui.drawRect(0, 0, 40, this.height, new Color(47, 35, 37).getRGB());
+		
+		DrawRoundedRect.draw(155, 30, this.width - 170, this.height - 60, 6, new Color(73, 58, 61));
+		
+		GlStateManager.pushMatrix();
+		
+    	float f = 1.8F - MathHelper.abs(MathHelper.sin((float)(Minecraft.getSystemTime() % 10000L) / 5000.0F * (float)Math.PI * 1F) * 1F);
+        f = f * 100.0F / (float)(this.fontRendererObj.getStringWidth("Hutao Is The Best!!") + 32);
+        GlStateManager.translate(45, f * this.height / 2, 0);
+        GlStateManager.rotate(90F, 0, 0, 1.0F);
+        this.drawCenteredString(fontRendererObj, "Hutao Is The Best!!", 0, -5, -1);
+        
+        GlStateManager.popMatrix();
+        
+        if(Minecraft.getMinecraft().getDebugFPS() >= 1500) {
+            DrawRoundedRect.draw(160, 5, 1500 / 6, 15, 2, new Color(47, 35, 37));
+        } else {
+        	DrawRoundedRect.draw(160, 5, Minecraft.getMinecraft().getDebugFPS() / 6, 15, 2, new Color(47, 35, 37));
+        }
+        mc.fontRendererObj.drawString("§l" + Minecraft.getMinecraft().getDebugFPS(), 165, 8, -1);
+		DrawRoundedRect.draw(160, 40, this.width - 180, 35, 8, new Color(47, 35, 37));
+		
+		GlStateManager.pushMatrix();
+		
+		mc.fontRendererObj.drawString("§l" + time, 170, 53, -1);
+		
+		GlStateManager.popMatrix();
+		
+		DrawRoundedRect.draw(160, 80, this.width - 180, this.height - 120, 8, new Color(47, 35, 37));
+		
+		DrawPicture.draw(35, this.height / 2 - 90, 130, 160, "hutao/hutao.png");
+
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		
+		if(checkBox.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 70, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Watermark", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox1.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 85, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Toggle Sprint", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox2.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 45, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Zoom", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox3.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 40, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Chat", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox4.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 40, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("CPS", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox5.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 100, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Item Held Status", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox6.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 75, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Item Physics", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox7.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 75, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Day Counter", mouseX + 10, mouseY, -1);
+		}
+		
+		if(checkBox8.hovered) {
+			Gui.drawRect(mouseX, mouseY - 5, mouseX + 75, mouseY + 15, new Color(0, 0, 0, 100).getRGB());
+			fontRendererObj.drawString("Keystrokes", mouseX + 10, mouseY, -1);
+		}
+		mc.fontRendererObj.drawString("§lPage 1", this.width - 65, this.height - 55, -1);
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		if(button.id == -3) {
+			try {
+                Desktop.getDesktop().browse(new URL("https://discord.gg/ZJ9TYCQfN9").toURI());
+            } catch (Exception e) {
+            	//something
+            }
+		}
+		if(button.id == -2) {
+			mc.displayGuiScreen(new Next1());
+		}
+		if(button.id == -1) {
+			mc.displayGuiScreen(new GuiCosmetic());
+		}
+		if(button.id == 0) {
+			mc.thePlayer.closeScreen();
+		}
+		if(button.id == 1) {
+			mc.displayGuiScreen(new GuiHudScreen());
+		}
+		if(button.id == 2) {
+			Hutao.getInstance().addMod.hutao.onoff();
+		}
+		if(button.id == 3) {
+			Hutao.getInstance().addMod.toggleSprint.onoff();
+		}
+		if(button.id == 4) {
+			Hutao.getInstance().addMod.zoom.onoff();
+		}
+		if(button.id == 5) {
+			Hutao.getInstance().addMod.chat.onoff();
+		}
+		if(button.id == 6) {
+			Hutao.getInstance().addMod.cps.onoff();
+		}
+		if(button.id == 7) {
+			Hutao.getInstance().addMod.itemHeldStatus.onoff();
+		}
+		if(button.id == 8) {
+			Hutao.getInstance().addMod.itemPhysics.onoff();
+		}
+		if(button.id == 9) {
+			Hutao.getInstance().addMod.dayCounter.onoff();
+		}
+		if(button.id == 10) {
+			Hutao.getInstance().addMod.keystrokes.onoff();
+		}
+		super.actionPerformed(button);
+	}
+	
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+}

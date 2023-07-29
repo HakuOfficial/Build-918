@@ -1,0 +1,193 @@
+package client.screen.cosmetic;
+
+import java.awt.Color;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import client.Hutao;
+import client.cosmetic.CosmeticBoolean;
+import client.draw.DrawPicture;
+import client.draw.DrawRoundedRect;
+import client.screen.hud.GuiHudScreen;
+import client.screen.module.GuiModule;
+import client.scroll.Scroll;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiCosmetic extends GuiScreen {
+	
+	private Calendar calendar;
+	private SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+	private String time = format.format(Calendar.getInstance().getTime());
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+		mc.entityRenderer.loadShader(new ResourceLocation("hutao/blur.json"));
+		this.buttonList.add(new GuiButton(0, this.width - 55, 40, 35, 35, "§lX"));
+		this.buttonList.add(new GuiButton(1, this.width - 95, 40, 35, 35, "§lHud"));;
+		this.buttonList.add(new GuiButton(-1, this.width - 165, 40, 65, 35, "§lMod Menu"));;
+		
+		this.buttonList.add(new GuiButton(2, 165, 90, this.width / 2 - 119, 25, "Hutao Cape A"));
+		this.buttonList.add(new GuiButton(3, 165, 120, this.width / 2 - 119, 25, "Megumin Cape B"));
+		this.buttonList.add(new GuiButton(4, 165, 150, this.width / 2 - 119, 25, "Minecraft Cape"));
+		this.buttonList.add(new GuiButton(5, this.width / 2 + 80, 90, this.width / 2 - 119, 25, "BunnyCapeC"));
+		this.buttonList.add(new GuiButton(6, this.width / 2 + 80, 120, this.width / 2 - 119, 25, "CityCapeD"));
+		this.buttonList.add(new GuiButton(7, this.width / 2 + 80, 150, this.width / 2 - 119, 25, "StarCapeE"));
+	}
+	
+
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		mc.entityRenderer.stopUseShader();
+	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+		
+		Gui.drawRect(0, 0, 35, this.height, new Color(47, 35, 37).getRGB());
+		
+		DrawRoundedRect.draw(155, 30, this.width - 170, this.height - 60, 6, new Color(73, 58, 61));
+		
+		GlStateManager.pushMatrix();
+		
+    	float f = 1.8F - MathHelper.abs(MathHelper.sin((float)(Minecraft.getSystemTime() % 10000L) / 5000.0F * (float)Math.PI * 1F) * 1F);
+        f = f * 100.0F / (float)(this.fontRendererObj.getStringWidth("Hutao Is The Best!!") + 32);
+        GlStateManager.translate(45, f * this.height / 2, 0);
+        GlStateManager.rotate(90F, 0, 0, 1.0F);
+        this.drawCenteredString(fontRendererObj, "Hutao Is The Best!!", 0, 0, -1);
+        
+        GlStateManager.popMatrix();
+        
+		DrawRoundedRect.draw(160, 40, this.width - 180, 35, 8, new Color(47, 35, 37));
+		
+		GlStateManager.pushMatrix();
+		
+		mc.fontRendererObj.drawString("§l" + time, 170, 53, -1);
+		
+		GlStateManager.popMatrix();
+		
+		DrawRoundedRect.draw(160, 80, this.width - 180, this.height - 120, 8, new Color(47, 35, 37));
+		super.drawScreen(mouseX, mouseY, partialTicks);
+
+		drawEntityOnScreen(105, 180, 70, 0, 0, Minecraft.getMinecraft().thePlayer);
+	}
+	
+	public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
+    {
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.enableColorMaterial();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float)posX, (float)posY, 50.0F);
+        GlStateManager.scale((float)(-scale), (float)scale, (float)scale);
+        GlStateManager.rotate(180.0F, 100.0F, 0.0F, 1.0F);
+        float f = ent.renderYawOffset;
+        float f1 = ent.rotationYaw;
+        float f2 = ent.rotationPitch;
+        float f3 = ent.prevRotationYawHead;
+        float f4 = ent.rotationYawHead;
+        GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
+        RenderHelper.enableStandardItemLighting();
+        GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
+        ent.renderYawOffset = (float)Math.atan((double)(mouseX / 40.0F)) * 20.0F;
+        ent.rotationYaw = (float)Math.atan((double)(mouseX / 40.0F)) * 40.0F;
+        ent.rotationPitch = -((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F;
+        ent.rotationYawHead = ent.rotationYaw;
+        ent.prevRotationYawHead = ent.rotationYaw;
+        GlStateManager.translate(0.0F, 0.0F, 0.0F);
+        RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
+        rendermanager.setPlayerViewY(180.0F);
+        rendermanager.setRenderShadow(false);
+        rendermanager.renderEntityWithPosYaw(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+        rendermanager.setRenderShadow(true);
+        ent.renderYawOffset = f;
+        ent.rotationYaw = f1;
+        ent.rotationPitch = f2;
+        ent.prevRotationYawHead = f3;
+        ent.rotationYawHead = f4;
+        GlStateManager.popMatrix();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GlStateManager.disableTexture2D();
+        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+    }
+
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		if(button.id == -1) {
+			mc.displayGuiScreen(new GuiModule());
+		}
+		if(button.id == 0) {
+			mc.thePlayer.closeScreen();
+		}
+		if(button.id == 1) {
+			mc.displayGuiScreen(new GuiHudScreen());
+		}
+		
+		if(button.id == 2) {
+			CosmeticBoolean.hutaoCapeA = true;
+			CosmeticBoolean.meguminCapeB = false;
+			CosmeticBoolean.normalCape = false;
+			CosmeticBoolean.bunnyCapeC = false;
+			CosmeticBoolean.cityCapeD = false;
+			CosmeticBoolean.starCapeE = false;
+		}
+		if(button.id == 3) {
+			CosmeticBoolean.hutaoCapeA = false;
+			CosmeticBoolean.meguminCapeB = true;
+			CosmeticBoolean.normalCape = false;
+			CosmeticBoolean.bunnyCapeC = false;
+			CosmeticBoolean.cityCapeD = false;
+			CosmeticBoolean.starCapeE = false;
+		}
+		if(button.id == 4) {
+			CosmeticBoolean.hutaoCapeA = false;
+			CosmeticBoolean.meguminCapeB = false;
+			CosmeticBoolean.normalCape = true;
+			CosmeticBoolean.bunnyCapeC = false;
+			CosmeticBoolean.cityCapeD = false;
+			CosmeticBoolean.starCapeE = false;
+		}
+		if(button.id == 5) {
+			CosmeticBoolean.hutaoCapeA = false;
+			CosmeticBoolean.meguminCapeB = false;
+			CosmeticBoolean.normalCape = false;
+			CosmeticBoolean.bunnyCapeC = true;
+			CosmeticBoolean.cityCapeD = false;
+			CosmeticBoolean.starCapeE = false;
+		}
+		if(button.id == 6) {
+			CosmeticBoolean.hutaoCapeA = false;
+			CosmeticBoolean.meguminCapeB = false;
+			CosmeticBoolean.normalCape = false;
+			CosmeticBoolean.bunnyCapeC = false;
+			CosmeticBoolean.cityCapeD = true;
+			CosmeticBoolean.starCapeE = false;
+		}
+		if(button.id == 7) {
+			CosmeticBoolean.hutaoCapeA = false;
+			CosmeticBoolean.meguminCapeB = false;
+			CosmeticBoolean.normalCape = false;
+			CosmeticBoolean.bunnyCapeC = false;
+			CosmeticBoolean.cityCapeD = false;
+			CosmeticBoolean.starCapeE = true;
+		}
+		super.actionPerformed(button);
+	}
+
+}

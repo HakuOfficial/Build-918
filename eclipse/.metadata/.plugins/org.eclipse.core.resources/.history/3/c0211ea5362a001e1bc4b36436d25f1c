@@ -1,0 +1,98 @@
+package client.mods.implementations;
+
+import client.event.EventTarget;
+import client.event.impl.EventClientTick;
+import client.mods.Hud;
+
+public class ToggleSprint extends Hud {
+	
+	private boolean toggled;
+    private int wasPressed;
+    private int keyHoldTicks;
+    private static ToggleSprint instance;
+    
+    public ToggleSprint() {
+        super("Toggle Sprint", 50, 16);
+        this.keyHoldTicks = 7;
+        ToggleSprint.instance = this;
+    }
+    
+    @Override
+    public void onRenderHUD() {
+    	if(!(getDisplayText() == null)) {
+    		super.onRenderHUD();
+    	}
+        fr.drawString(getDisplayText(), getX() + 3, getY() + 2, -1);
+    }
+    
+    @Override
+    public void onRenderHUDScreen() {
+       fr.drawString("[Sprinting (Toggled)]", getX() + 3, getY() + 2, -1);
+    }
+    
+    @EventTarget
+    public void updateMovement(EventClientTick event) {
+        if (this.isOnOff()) {
+            if (this.mc.gameSettings.keyBindSprint.isKeyDown()) {
+                if (this.wasPressed == 0) {
+                    if (this.toggled) {
+                        this.wasPressed = -1;
+                    }
+                    else if (this.mc.thePlayer.capabilities.isFlying) {
+                        this.wasPressed = this.keyHoldTicks + 1;
+                    }
+                    else {
+                        this.wasPressed = 1;
+                    }
+                    this.toggled = !this.toggled;
+                }
+                else if (this.wasPressed > 0) {
+                    ++this.wasPressed;
+                }
+            }
+            else {
+                if (this.keyHoldTicks > 0 && this.wasPressed > this.keyHoldTicks) {
+                    this.toggled = false;
+                }
+                this.wasPressed = 0;
+            }
+        }
+        else {
+            this.toggled = false;
+        }
+        if (this.toggled) {
+            this.mc.thePlayer.setSneaking(true);
+        }
+    }
+    
+    private String getDisplayText() {
+        String displayText = null;
+        final boolean isFlying = this.mc.thePlayer.capabilities.isFlying;
+        final boolean isSprintHeld = this.mc.gameSettings.keyBindSprint.isKeyDown();
+        final boolean isSprinting = this.mc.thePlayer.isSprinting();
+        if (isFlying) {
+            displayText = "[Flying]";
+        }
+        else if (this.toggled) {
+            if (isSprintHeld) {
+                displayText = "[Sprinting (Key Held)]";
+            }
+            else {
+                displayText = "[Sprinting (Toggled)]";
+            }
+        }
+        else if (isSprinting) {
+            displayText = "[Sprinting (Vanilla)]";
+        }
+        return displayText;
+    }
+    
+    public int getWidth() {
+    	return fr.getStringWidth("[Sprinting (Toggled)]") + 6;
+    }
+
+    public int getHeight() {
+        return this.fr.FONT_HEIGHT + 3;
+    }
+
+}

@@ -1,0 +1,33 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+import net.minecraft.client.Minecraft;
+
+public class FPS extends Hud {
+	
+	public FPS() {
+		super("FPS", 40, 10);
+	}
+
+	@Override
+	public void onRenderHUD() {
+		super.onRenderHUD();
+		fr.drawString(mc.getDebugFPS() + " FPS", getX(), getY(), -1);
+	}
+	
+	@Override
+	public void onRenderHUDScreen() {
+		super.onRenderHUDScreen();
+		fr.drawString(mc.getDebugFPS() + " FPS", getX(), getY(), -1);
+	}
+	
+	@Override
+	public int getWidth() {
+		return fr.getStringWidth(mc.getDebugFPS() + " FPS") + 2;
+	}
+	
+	@Override
+	public int getHeight() {
+		return fr.FONT_HEIGHT + 1;
+	}
+}

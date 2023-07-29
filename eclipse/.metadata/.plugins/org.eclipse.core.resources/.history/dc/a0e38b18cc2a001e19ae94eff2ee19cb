@@ -1,0 +1,10 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class ItemGlint extends Hud {
+
+	public ItemGlint() {
+		super("Item Glint", 0, 0);
+	}
+}

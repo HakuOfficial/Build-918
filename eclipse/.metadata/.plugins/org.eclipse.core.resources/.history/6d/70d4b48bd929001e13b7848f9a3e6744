@@ -1,0 +1,11 @@
+package client.mods.implementations;
+
+import client.mods.Hud;
+
+public class Chat extends Hud {
+	
+	public Chat() {
+		super("Chat", 0, 0);
+	}
+
+}

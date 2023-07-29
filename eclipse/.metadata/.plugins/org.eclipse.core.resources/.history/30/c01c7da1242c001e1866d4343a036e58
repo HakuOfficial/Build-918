@@ -1,0 +1,17 @@
+package client.screen.settings;
+
+import java.util.ArrayList;
+
+import client.mods.Hud;
+import client.screen.settings.impl.*;
+
+public class AddSettings {
+	
+	public ArrayList<Settings> set = new ArrayList<>();
+	
+	public MinimalViewBobbing minimal = new MinimalViewBobbing();
+	
+	public AddSettings() {
+		set.add(minimal);
+	}
+}
